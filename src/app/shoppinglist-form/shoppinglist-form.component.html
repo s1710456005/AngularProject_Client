@@ -1,0 +1,143 @@
+<div class="container">
+    <h1>Einkaufliste erstellen</h1>
+    <form [formGroup]="shoppinglistForm" (ngSubmit)="submitForm()">
+        <div class="header-infos">
+            <input type="hidden" name="id">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="slTitle">Titel*</label>
+                        <input type="text" id="slTitle" class="form-control" formControlName="title">
+                        <div *ngIf="errors.title" class="invalid-feedback d-block">{{errors.title}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="slTitle">Deadline*</label>
+                        <input type="date" id="slDeadline" class="form-control" formControlName="deadline">
+                        <div *ngIf="errors.deadline" class="invalid-feedback d-block">{{errors.deadline}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-infos">
+            <ul class="nav nav-pills nav-fill bg-light" id="shoppinglistTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="shoppingitemsTab" data-toggle="tab" href="#shoppingitems" role="tab" aria-controls="shoppingitems" aria-selected="true">
+                        <i class="fas fa-shopping-cart front-icon"></i>
+                        <span>Einkaufsliste</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="messagesTab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
+                        <i class="fas fa-comments front-icon"></i>
+                        <span>Nachrichten</span>
+                    </a>
+                </li>
+                <!--
+                <li class="nav-item">
+                    <a class="nav-link" id="billsTab" data-toggle="tab" href="#bills" role="tab" aria-controls="bills" aria-selected="false">
+                        <i class="fas fa-file-invoice-dollar front-icon"></i>
+                        <span>Rechnungen</span>
+                    </a>
+                </li>
+                -->
+            </ul>
+            <div class="tab-content" id="shoppinglistTabContent">
+                <div class="tab-pane fade show active" id="shoppingitems" role="tabpanel" aria-labelledby="shoppingitemsTab">
+                    <div formArrayName="shoppingitems" class="default-margin">
+                        <div class="row">
+                            <div class="col">
+                                <div *ngIf="!shoppingitems?.controls" class="alert alert-info">
+                                    <strong>Einen Augenblick.. </strong> Die Einträge werden geladen
+                                </div>
+                                <div *ngIf="!shoppingitems?.controls && !shoppingitems?.controls.length" class="alert alert-info">
+                                    <strong>Information: </strong> Es wurden derzeit noch keine Einkaufsliste hinzugefügt.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngFor="let control of shoppingitems?.controls; index as i; last as la; first as fi" [formGroupName]="i">
+                            <input type="hidden" name="id">
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                                <div class="form-group">
+                                    <label *ngIf="fi" for="slTitle">Menge*</label>
+                                    <input type="text" id="slQuantity" class="form-control" formControlName="quantity">
+                                    <div *ngIf="errors.quantity" class="invalid-feedback d-block">{{errors.quantity}}</div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                                <div class="form-group">
+                                    <label *ngIf="fi" for="slUnit">Einheit</label>
+                                    <select class="form-control" id="slUnit" class="form-control" formControlName="unit">
+                                        <option value="default" disabled>Einheit wählen</option>
+                                        <option *ngFor="let unit of aUnits" [ngValue]="unit">{{unit.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-5">
+                                <div class="form-group">
+                                    <label *ngIf="fi" for="slProductname">Produktname*</label>
+                                    <input type="text" id="slProductname" class="form-control" formControlName="title">
+                                    <div *ngIf="errors.title" class="invalid-feedback d-block">{{errors.title}}</div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2">
+                                <div class="form-group">
+                                    <label *ngIf="fi" for="slPrice">Max. Preis in Euro</label>
+                                    <input type="text" id="slPrice" class="form-control" formControlName="price">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-1 m-auto">
+                                <span *ngIf="la; else showRemoveAction">
+                                    <button type="button" class="btn icon-btn" (click)="addShoppinglistitemControl()">
+                                        <i class="fas fa-plus icon"></i>
+                                    </button>
+                                </span>
+                                <ng-template #showRemoveAction>
+                                    <button type="button" class="btn icon-btn pb-2" (click)="removeShoppinglistitemControl(i)">
+                                        <i class="fas fa-minus icon"></i>
+                                    </button>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messagesTab">
+                    <!--
+                    <div formArrayName="messages">
+                        <div class="row" *ngFor="let control of messages?.controls; index as i; last as la" [formGroupName]="i">
+                            <input type="hidden" name="id">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="slMessage">Nachricht</label>
+                                    <textarea class="form-control" id="slMessage" formControlName="messagetext"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                    <div class="row">
+                        <input type="hidden" name="id">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="slMessage">Nachricht</label>
+                                <textarea class="form-control" rows="5" id="slMessage" formControlName="messagetext"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--
+                <div class="tab-pane fade" id="bills" role="tabpanel" aria-labelledby="billsTab">..dd.</div>
+                -->
+            </div>
+
+        </div>
+        <div class="footer-button-container">
+            <button type="submit" class="btn btn-primary" [disabled]="shoppinglistForm.invalid">Liste Speichern</button>
+            <button type="button" class="btn btn-secondary" [routerLink]="'/shoppinglists'">
+                zurück zur Übersicht
+            </button>
+        </div>
+    </form>
+
+</div>
+

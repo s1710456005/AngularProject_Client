@@ -1,0 +1,25 @@
+<div class="row card-item-container">
+    <div class="col">
+        <i [ngClass]="{'icon-status-open fa-clock': shoppinglist.status.name=='open',
+                   'icon-status-inprogress fa-shopping-cart': shoppinglist.status.name=='inprogress',
+                    'icon-status-done fa-check': shoppinglist.status.name=='done',
+                    'fas': shoppinglist.status.name}"></i>
+        <div class="card">
+            <div class="card-body">
+                <h6>Deadline am {{shoppinglist.deadline | date: 'dd.MM.yyyy'}}</h6><hr>
+                <h5 class="card-title">{{shoppinglist.title}}</h5>
+                <p class="card-text">
+                            <span *ngIf="shoppinglist.volunteer; else showDefaultNonVolunteer">
+                                Einkauf wurde übernommen von: <b>{{shoppinglist.volunteer.firstname}} {{shoppinglist.volunteer.lastname}}</b>
+                            </span>
+                    <ng-template #showDefaultNonVolunteer>
+                        Der Einkauf wurde derzeit noch von keinem übernommen
+                    </ng-template>
+                </p>
+                <!--
+                <button type="button" class="btn btn-primary" (click)="showShoppinglistDetails(shoppinglist)">Detailansicht</button>
+                -->
+            </div>
+        </div>
+    </div>
+</div>

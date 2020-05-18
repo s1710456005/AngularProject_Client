@@ -1,0 +1,63 @@
+<div class="container">
+    <h1>Überblick der Einkaufslisten</h1>
+</div>
+<div class="container">
+    <section class="cards-container">
+        <span *ngIf="!authService.isCurrentUserVolunteer()">
+            <h2 class="widget-title-open">Offene Einkaufslisten</h2>
+            <span *ngFor="let shoppinglist of shoppinglists">
+                    <a *ngIf="shoppinglist.status.name=='open' && shoppinglist.user.id == authService.getCurrentUserId()"
+                       class="bs-shoppinglists-overview-item"
+                       [shoppinglist]="shoppinglist"
+                       [routerLink]="shoppinglist.id"></a>
+            </span>
+            <div *ngIf="!shoppinglists" class="alert alert-info">
+                <strong>Information: </strong> Die Einkaufslisten werden geladen.
+            </div>
+            <div *ngIf="false" class="alert alert-info">
+                <strong>Information: </strong> Derzeit gibt es keine offenen Einkäufe
+            </div>
+        </span>
+
+        <h2 class="widget-title-open">Übernommene Einkaufslisten</h2>
+        <span *ngFor="let shoppinglist of shoppinglists">
+            <span *ngIf="authService.isCurrentUserVolunteer(); else showListOfSearcher">
+                    <a *ngIf="shoppinglist.status.name=='inprogress' && shoppinglist.volunteer.id == authService.getCurrentUserId()" class="bs-shoppinglist-overview-vol-item"
+                       [shoppinglist]="shoppinglist"
+                       [routerLink]="shoppinglist.id"></a>
+                </span>
+            <ng-template #showListOfSearcher>
+                <a *ngIf="shoppinglist.status.name=='inprogress' && shoppinglist.user.id == authService.getCurrentUserId()" class="bs-shoppinglists-overview-item"
+                   [shoppinglist]="shoppinglist"
+                   [routerLink]="shoppinglist.id"></a>
+            </ng-template>
+        </span>
+        <div *ngIf="!shoppinglists" class="alert alert-info">
+            <strong>Information: </strong> Die Einkaufslisten werden geladen.
+        </div>
+        <div *ngIf="false" class="alert alert-info">
+            <strong>Information: </strong> Derzeit gibt es keine übernommene Einkäufe
+        </div>
+
+        <h2 class="widget-title-open">Abgeschlossene Einkaufslisten</h2>
+        <span *ngFor="let shoppinglist of shoppinglists">
+            <span *ngIf="authService.isCurrentUserVolunteer(); else showListOfSearcher">
+                    <a *ngIf="shoppinglist.status.name=='done' && shoppinglist.volunteer.id == authService.getCurrentUserId()" class="bs-shoppinglist-overview-vol-item"
+                       [shoppinglist]="shoppinglist"
+                       [routerLink]="shoppinglist.id"></a>
+                </span>
+            <ng-template #showListOfSearcher>
+                <a *ngIf="shoppinglist.status.name=='done' && shoppinglist.user.id == authService.getCurrentUserId()" class="bs-shoppinglists-overview-item"
+                   [shoppinglist]="shoppinglist"
+                   [routerLink]="shoppinglist.id"></a>
+            </ng-template>
+        </span>
+        <div *ngIf="!shoppinglists" class="alert alert-info">
+            <strong>Information: </strong> Die Einkaufslisten werden geladen.
+        </div>
+        <div *ngIf="false" class="alert alert-info">
+            <strong>Information: </strong> Derzeit gibt es keine abgeschlossene Einkäufe
+        </div>
+
+    </section>
+</div>

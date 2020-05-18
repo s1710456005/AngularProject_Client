@@ -1,1 +1,365 @@
-/* You can add global styles to this file, and also import other style files */
+/*fontawesome icons*/
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
+/*color variables*/
+$mainBackgroundColor: #f2f2f2;
+$mainPrimaryColor: #f2f2f2;
+$mainPrimaryColorBtn: #56BFA0;
+$mainPrimaryColorLight: #4ebaaa;
+$mainPrimaryColorDark: #005b4f;
+
+/*default spacing*/
+$defaultPadding: 16px;
+$defaultMargin: 16px;
+
+
+/*---------------------------------------------*/
+/*-----------Default color classes----------------*/
+/*---------------------------------------------*/
+.bg-primary-color-light{
+  background-color: $mainPrimaryColorLight;
+}
+
+.bg-primary-color-middle{
+  background-color: $mainPrimaryColorBtn;
+}
+
+.bg-primary-color-dark{
+  background-color: $mainPrimaryColorDark;
+}
+
+/*---------------------------------------------*/
+/*-----------style of overview-----------------*/
+/*---------------------------------------------*/
+
+a, .nav-link{
+  color: #000;
+  &.active{
+    color: $mainPrimaryColorBtn;
+    font-weight: bold!important;
+  }
+  &:hover{
+    color: $mainPrimaryColorDark;
+  }
+}
+
+.navbar.navbar-expand-sm{
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+header{
+  padding-bottom: 56px;
+}
+
+section{
+  padding: 16px 0;
+
+}
+
+.container{
+  padding: 16px;
+
+}
+/*status-icons*/
+*[class^="icon-status"]{
+  &.fa, &.fas {
+    padding: 20px;
+    font-size: 26px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+  }
+}
+
+*[class^="icon-status"] {
+  color: #fff;
+}
+
+.icon-status-open{
+  background: $mainPrimaryColorLight;
+}
+.icon-status-inprogress{
+  background: $mainPrimaryColorBtn;
+}
+.icon-status-done{
+  background: $mainPrimaryColorDark;
+}
+
+.front-icon{
+  padding-right: 8px;
+}
+
+/*cards container - for status icon*/
+$width-statusicon: 70px;
+.card-item-container{
+  position: relative;
+  padding: 16px 0;
+  *[class^="icon-status"]{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    max-width: $width-statusicon;
+  }
+  .card{
+    left: $width-statusicon/2;
+    margin-right: $width-statusicon/2;
+    background-color: #fafafa;
+  }
+  .card-body{
+    margin-left: $width-statusicon/2;
+  }
+
+}
+
+
+/*fonts*/
+*{
+  font-family: Raleway;
+}
+
+.btn, .nav-item .nav-link, h6{
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.25px;
+  font-weight: 500;
+
+}
+
+
+a, .nav-link{
+  cursor: pointer;
+}
+
+//disable link-style for cards
+.bs-shoppinglists-overview-item, a.bs-shoppinglists-overview-item:hover,
+.bs-shoppinglist-overview-vol-item, a.bs-shoppinglist-overview-vol-item:hover{
+  text-decoration: none;
+  color: #000;
+
+}
+
+.teaser-title{
+  color: $mainPrimaryColorBtn;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+h6{
+  font-size: 0.9rem;
+}
+
+
+/*set shadow-style*/
+*[class^="icon-status"], .btn, .card {
+  border: 0;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.btn, .card{
+  &:hover, &:active, &:focus{
+      outline: 0;
+      -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+      box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+      transition: box-shadow 0.5s;
+      transition: -webkit-box-shadow 0.5s;
+  }
+}
+.btn{
+  padding: $defaultPadding/2 $defaultPadding;
+}
+.btn-primary{
+  background-color: $mainPrimaryColorBtn;
+  &:hover{
+    background-color: $mainPrimaryColorBtn;
+    opacity: 0.9;
+    transition: opacity 1s;
+  }
+  &.disabled, &:disabled, &:active, &:focus{
+    background-color: $mainPrimaryColorBtn;
+    border-color: $mainPrimaryColorBtn;
+  }
+}
+.icon-btn {
+  background-color: white;
+  border: none;
+  color: $mainPrimaryColorBtn;
+  padding: 12px 16px;
+  font-size: 20px;
+  box-shadow: none;
+}
+
+.tab-content{
+  padding: 16px;
+  border: 3px solid #f8f9fa;
+  border-top: unset;
+}
+
+/*---------------------------------------------*/
+/*-----------style for detail page-------------*/
+/*---------------------------------------------*/
+
+/*tabs of shoppinglist*/
+#shoppinglistTabs{
+  .nav-link{
+    &.active{
+      -webkit-border-radius: unset;
+      -moz-border-radius: unset;
+      border-radius: unset;
+      color: $mainPrimaryColor;
+      background-color: $mainPrimaryColorBtn;
+    }
+    color: #000;
+    padding: $defaultPadding;
+
+  }
+}
+
+
+.footer-button-container {
+  /* float: right; */
+  display: flex;
+  justify-content: flex-end;
+  &>*{
+    margin-left: $defaultPadding;
+  }
+}
+
+
+
+/*---------------------------------------------*/
+/*-----------style for messages----------------*/
+/*---------------------------------------------*/
+
+.message-container{
+  padding: $defaultPadding/2 0;
+
+}
+.message-card{
+  border: 2px solid #F8F9FA;
+  background-color: #F8F9FA;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+
+  padding: $defaultPadding;
+
+  .message-header{
+    padding-bottom: 8px;
+  }
+}
+
+/*---------------------------------------------*/
+/*-----------style for shoppingitems-----------*/
+/*---------------------------------------------*/
+th {
+  border: none;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.table thead tr th{
+  border: none;
+}
+
+/*home*/
+.image-button{
+  border: 1px solid white;
+  border-radius: 4px;
+  height: 250px;
+  width: 100%;
+  display: flex;
+  padding: $defaultPadding;
+  align-items: flex-end;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: $mainPrimaryColorDark;
+}
+
+.bg-img-shoppinglist, .bg-img-create-list{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.bg-img-shoppinglist{
+  background-image: url("assets/images/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg");
+}
+
+.bg-img-create-list{
+  background-image: url("assets/images/woman-s-hand-using-a-pen-noting-on-notepad-6360.jpg");
+}
+
+input.form-control, select.form-control, textarea.form-control{
+  background-color: #f2f2f2;
+  border: unset;
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom: 2px solid #d2d2d2;
+  padding: 1.375rem .75rem;
+}
+
+label {
+  margin-bottom: .25rem;
+  font-weight: 600;
+}
+
+h1{
+  margin-top: 3rem;
+}
+
+/*---------------------------------------------*/
+/*-----------login container-------------------*/
+/*---------------------------------------------*/
+
+.container.login{
+  height: 100vh;
+  display: flex;
+  .login-container{
+    width: 80vw;
+    height: 60vh;
+    border: 2px solid #F8F9FA;
+    border-radius: 4px;
+    outline: 0;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    margin: auto;
+    display: flex;
+    .banner-login, .form-login{
+      width: 50%;
+    }
+    .banner-login{
+      background-color: #56BFA0;
+      color: #fff;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      padding: $defaultPadding*2;
+
+    }
+    .teaser-small{
+      text-transform: uppercase;
+      font-weight: bold;
+      display: flex;
+      align-self: flex-end;
+    }
+    .login.teaser{
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+  }
+}
+
+.form-login{
+  padding: 32px;
+  margin: auto;
+}
+
+.pull-right{
+  float: right;
+}

@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Überblick der offenen Einkaufslisten</h1>
+</div>
+<div class="container">
+    <section class="cards-container">
+        <h2 class="widget-title-open">Offene Einkaufslisten</h2>
+        <span *ngFor="let shoppinglist of shoppinglists">
+                <a *ngIf="shoppinglist.status.name=='open' && !shoppinglist.volunteer"
+                   class="bs-shoppinglist-overview-vol-item"
+                   [shoppinglist]="shoppinglist"
+                   [routerLink]="['../shoppinglists', shoppinglist?.id]"></a>
+        </span>
+        <div *ngIf="!shoppinglists" class="alert alert-info">
+            <strong>Information: </strong> Die Einkaufslisten werden geladen.
+        </div>
+        <div *ngIf="false" class="alert alert-info">
+            <strong>Information: </strong> Derzeit gibt es keine offene Einkäufe
+        </div>
+    </section>
+</div>

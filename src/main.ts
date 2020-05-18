@@ -8,5 +8,8 @@ if (environment.production) {
   enableProdMode();
 }
 
+/*
+bootsrap process for the browser. there are many other as for eg. mobile applications
+ */
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));

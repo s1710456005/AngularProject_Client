@@ -1,0 +1,127 @@
+<div class="container" *ngIf="shoppinglist">
+    <h1>Einkaufliste: {{shoppinglist?.title}}</h1>
+    <section class="header-infos">
+        <span>Status: {{shoppinglist?.status?.name}}</span><br>
+        <span *ngIf="shoppinglist?.volunteer; else showDefaultNonVolunteer">
+         Übernommen von: <b>{{shoppinglist?.volunteer.firstname}} {{shoppinglist?.volunteer.lastname}}</b>
+     </span><br>
+        <ng-template #showDefaultNonVolunteer>
+            Der Einkauf wurde derzeit noch von keinem übernommen
+        </ng-template>
+        <span>Deadline: {{shoppinglist?.deadline | date: 'dd.MM.yyyy'}}</span><br>
+    </section>
+    <section class="detail-infos">
+        <ul class="nav nav-pills nav-fill bg-light" id="shoppinglistTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="shoppingitemsTab" data-toggle="tab" href="#shoppingitems" role="tab" aria-controls="shoppingitems" aria-selected="true">
+                    <i class="fas fa-shopping-cart front-icon"></i>
+                    <span>Einkaufsliste</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="messagesTab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
+                    <i class="fas fa-comments front-icon"></i>
+                    <span>Nachrichten</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="billsTab" data-toggle="tab" href="#bills" role="tab" aria-controls="bills" aria-selected="false">
+                    <i class="fas fa-file-invoice-dollar front-icon"></i>
+                    <span>Rechnungen</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="shoppinglistTabContent">
+            <div class="tab-pane fade show active" id="shoppingitems" role="tabpanel" aria-labelledby="shoppingitemsTab">
+                <table class="table table-hover p-5">
+                    <thead>
+                    <tr>
+                        <th>Menge</th>
+                        <th>Produktname</th>
+                        <th>Maximaler Preis in Euro</th>
+                    </tr>
+                    </thead>
+                    <tbody *ngFor="let shoppingitem of shoppinglist?.shoppingitems">
+                    <tr>
+                        <td>{{shoppingitem.quantity}} {{shoppingitem.unit?.name}}</td>
+                        <td>{{shoppingitem.title}}</td>
+                        <td>{{shoppingitem.price}} Euro</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messagesTab">
+                <div *ngFor="let message of shoppinglist?.messages" class="message-container">
+                    <div class="message-card">
+                        <div class="message-header d-flex justify-content-between">
+                            <div>
+                                <i class="fas fa-user-astronaut"></i>
+                                <span>{{message.user?.firstname}} {{message.user?.lastname}}</span>
+                            </div>
+                            <div>
+                                {{message.created_at | date: 'dd.MM.yyyy HH:mm'}}
+                            </div>
+                        </div>
+                        <div class="message-body">
+                            {{message.messagetext}}
+                        </div>
+                    </div>
+                </div>
+                <form *ngIf="authService.isLoggedIn()" [formGroup]="shoppinglistForm" (ngSubmit)="submitForm()">
+                    <input type="hidden" name="id">
+                    <div class="row">
+                        <input type="hidden" name="id">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="slMessage">Nachricht</label>
+                                <textarea class="form-control" rows="5" id="slMessage" formControlName="messagetext"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 footer-button-container">
+                            <button type="submit" class="btn btn-primary" [disabled]="shoppinglistForm.invalid">Nachricht speichern</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="tab-pane fade" id="bills" role="tabpanel" aria-labelledby="billsTab">
+                <form *ngIf="authService.isLoggedIn() && shoppinglist?.status?.name!='open' && shoppinglist?.volunteer?.id == authService.getCurrentUserId()" [formGroup]="shoppinglistFormAmount" (ngSubmit)="submitFormAmount()">
+                    <input type="hidden" name="id">
+                    <div class="row">
+                        <input type="hidden" name="id">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="totalAmount">Gesamtbetrag des Einkaufes (in Euro)</label>
+                                <input type="text" class="form-control" rows="5" id="totalAmount" formControlName="total_amount">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 footer-button-container">
+                            <button type="submit" class="btn btn-primary" [disabled]="shoppinglistFormAmount.invalid">Betrag speichern</button>
+                        </div>
+                    </div>
+                </form>
+                <div *ngIf="authService.isLoggedIn() && !authService.isCurrentUserVolunteer()">
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="totalAmountView">Gesamtbetrag des Einkaufes</label>
+                                <input type="text" value="{{shoppinglist?.total_amount?null:0.00}} €" class="form-control" rows="5" id="totalAmountView" disabled>
+                            </div>
+                        </div>
+                 </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="footer-button-container">
+        <button type="button" class="btn btn-primary" *ngIf="shoppinglist?.status?.name=='open' && authService.isLoggedIn() && !authService.isCurrentUserVolunteer()" [routerLink]="['../../editList', shoppinglist?.id]">Liste Bearbeiten</button>
+        <button type="button" class="btn btn-danger" *ngIf="shoppinglist?.status?.name=='open' && authService.isLoggedIn() && !authService.isCurrentUserVolunteer()" (click)="removeShoppinglist()">Einkaufliste löschen</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="'/shoppinglists'">
+            zurück zur Übersicht
+        </button>
+    </section>
+</div>
+

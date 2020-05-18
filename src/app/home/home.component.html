@@ -1,0 +1,43 @@
+<div class="container">
+    <section>
+        <div class="teaser-title mt-5">Gemeinsam sind wir stark</div>
+        <h1 class="mt-1">Mit helfender Hand durch die Corona-Krise</h1>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+    </section>
+   <hr>
+    <section *ngIf="authService.isLoggedIn()">
+        <h2>Was möchtest du gerne tun ?</h2>
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <a [routerLink]="'/createList'" *ngIf="!authService.isCurrentUserVolunteer()">
+                    <div class="image-button bg-light bg-img-create-list">
+                        <span>Erstelle eine Einkaufsliste</span>
+                    </div>
+                </a>
+                <a [routerLink]="'/openShoppinglists'" *ngIf="authService.isCurrentUserVolunteer()">
+                    <div class="image-button bg-light bg-img-create-list">
+                        <span>Jetzt Einkäufe übernehmen</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a [routerLink]="'/shoppinglists'" *ngIf="authService.isLoggedIn()">
+                    <div class="image-button bg-light bg-img-shoppinglist">
+                        <span>Zu meinen Einkaufslisten</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section *ngIf="!authService.isLoggedIn()">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <a [routerLink]="'/login'">
+                    <div class="image-button bg-light bg-img-create-list">
+                        <span>Jetzt anmelden und etwas bewirken</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>

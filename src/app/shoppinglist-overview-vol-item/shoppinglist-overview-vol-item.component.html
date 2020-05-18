@@ -1,0 +1,24 @@
+<div class="row card-item-container">
+    <div class="col">
+        <i [ngClass]="{'icon-status-open fa-clock': shoppinglist.status.name=='open',
+                   'icon-status-inprogress fa-shopping-cart': shoppinglist.status.name=='inprogress',
+                    'icon-status-done fa-check': shoppinglist.status.name=='done',
+                    'fas': shoppinglist.status.name}"></i>
+        <div class="card">
+            <div class="card-body">
+                <h6>Deadline am {{shoppinglist.deadline | date: 'dd.MM.yyyy'}}</h6><hr>
+                <h5 class="card-title">{{shoppinglist.title}}</h5>
+                <p class="card-text">
+                    Erstellt von: <b>{{shoppinglist.user.firstname}} {{shoppinglist.user.lastname}}</b><br>
+                    Über Klick auf die Liste, kommst du zu den Details...
+                </p>
+                <div *ngIf="shoppinglist.status.name=='inprogress'" class="footer-button-container">
+                    <button type="button" class="btn btn-primary" (click)="setListToDone(shoppinglist)" >Einkauf abschließen</button>
+                </div>
+                <div *ngIf="shoppinglist.status.name=='open'" class="footer-button-container">
+                    <button type="button" class="btn btn-primary" (click)="setListInProgress(shoppinglist)" >Einkauf übernehmen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
