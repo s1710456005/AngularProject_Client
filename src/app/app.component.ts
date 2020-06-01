@@ -26,4 +26,14 @@ export class AppComponent {
             return "Anmelden";
         }
     }
+
+    showResponsiveMenu(){
+        var x = document.getElementById("topNav");
+        if (x.className === "navbar-nav topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "navbar-nav";
+            x.className += " topnav";
+        }
+    }
 }

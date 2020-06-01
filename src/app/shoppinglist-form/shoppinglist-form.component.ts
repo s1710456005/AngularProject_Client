@@ -17,6 +17,7 @@ export class ShoppinglistFormComponent implements OnInit {
     shoppinglistForm: FormGroup;
     shoppinglist= ShoppinglistFactory.empty();
     aUnits: Unit[];
+    unit: Unit;
     errors: { [key: string]: string } = {};
 
     isUpdatingShoppinglist = false;

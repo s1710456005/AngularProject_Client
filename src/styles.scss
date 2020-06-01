@@ -43,6 +43,15 @@ a, .nav-link{
   }
 }
 
+.link-secondary{
+  color: $mainPrimaryColorBtn;
+  font-weight: bold!important;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.25px;
+  margin: auto 0;
+}
+
 .navbar.navbar-expand-sm{
   position: fixed;
   width: 100%;
@@ -78,13 +87,13 @@ section{
 }
 
 .icon-status-open{
-  background: $mainPrimaryColorLight;
+  background: $mainPrimaryColorBtn;
 }
 .icon-status-inprogress{
   background: $mainPrimaryColorBtn;
 }
 .icon-status-done{
-  background: $mainPrimaryColorDark;
+  background: $mainPrimaryColorBtn;
 }
 
 .front-icon{
@@ -225,6 +234,13 @@ h6{
   &>*{
     margin-left: $defaultPadding;
   }
+  &.multiple-btns{
+    justify-content: flex-start;
+    &>*{
+      margin-left: 0;
+      margin-right: $defaultPadding;
+    }
+  }
 }
 
 
@@ -310,15 +326,24 @@ label {
 }
 
 h1{
-  margin-top: 3rem;
+  font-family: Montserrat;
+  color: #424242;
+}
+
+h2{
+  font-weight: 600;
+  color: #424242;
 }
 
 /*---------------------------------------------*/
 /*-----------login container-------------------*/
 /*---------------------------------------------*/
-
+.navbar-brand{
+  color: #56BFA0;
+  font-weight: bold !important;
+}
 .container.login{
-  height: 100vh;
+  height: 90vh;
   display: flex;
   .login-container{
     width: 80vw;
@@ -362,4 +387,79 @@ h1{
 
 .pull-right{
   float: right;
+}
+
+/*---navigation responsive-----*/
+.topnav #menuBarIcon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  /*---navigation responsive-----*/
+  h1{
+    font-size: 2.0rem;
+  }
+  h2{
+    font-size: 1.5rem;
+  }
+  header{
+    padding-bottom: 0;
+  }
+  .navbar.navbar-expand-sm {
+    display: block!important;
+    position: relative;
+  }
+  .topnav .nav-item {display: none;}
+  .topnav .nav-item#menuBarIcon {
+    float: right;
+    display: block;
+  }
+  .topnav{
+    .nav-item .nav-link{
+      padding: 20px 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .nav-item:last-child{
+      border: none;
+    }
+  }
+
+  /*login responsive*/
+  .banner-login{
+    display: none!important;
+  }
+  .form-login{
+    width: 100%!important;
+    .btn{
+      width: 100%;
+      padding: 14px;
+    }
+  }
+
+  .container.login{
+    .login-container{
+      width: 100%;
+    }
+  }
+
+
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive #menuBarIcon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive .nav-item {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+}
+
+.image-button{
+  color: #353535;
 }

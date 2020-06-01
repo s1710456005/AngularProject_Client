@@ -1,5 +1,7 @@
 <div class="container">
+    <div class="teaser-title mt-5">Mit helfender Hand durch die Coronakrise! Jetzt</div>
     <h1>Einkaufliste erstellen</h1>
+    <p>Um eine Einkaufsliste zu erstellen, fülle die folgenden Formularfelder aus.</p>
     <form [formGroup]="shoppinglistForm" (ngSubmit)="submitForm()">
         <div class="header-infos">
             <input type="hidden" name="id">
@@ -18,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="detail-infos">
+        <div class="detail-infos mb-4">
             <ul class="nav nav-pills nav-fill bg-light" id="shoppinglistTabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="shoppingitemsTab" data-toggle="tab" href="#shoppingitems" role="tab" aria-controls="shoppingitems" aria-selected="true">

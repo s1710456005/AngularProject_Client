@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Shoppinglist} from "../shared/shoppinglist";
 import {ShoppinglistService} from "../shared/shoppinglist.service";
 import {AuthtenticationService} from "../shared/authtentication.service";
 
 @Component({
-  selector: 'a.bs-shoppinglist-overview-open',
+  selector: 'div.bs-shoppinglist-overview-open',
   templateUrl: './shoppinglist-overview-open.component.html',
   styles: []
 })
 export class ShoppinglistOverviewOpenComponent implements OnInit {
 
     shoppinglists: Shoppinglist[];
-
     constructor(private bs: ShoppinglistService, public authService: AuthtenticationService) {
     }
 

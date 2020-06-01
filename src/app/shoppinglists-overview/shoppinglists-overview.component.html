@@ -1,12 +1,14 @@
 <div class="container">
-    <h1>Überblick der Einkaufslisten</h1>
+    <div class="teaser-title mt-5">Überblick von meinen</div>
+    <h1>Einkaufslisten</h1>
+    <p>In dieser Ansicht findest du alle deine offenen Einkaufslisten.</p>
 </div>
 <div class="container">
     <section class="cards-container">
         <span *ngIf="!authService.isCurrentUserVolunteer()">
             <h2 class="widget-title-open">Offene Einkaufslisten</h2>
             <span *ngFor="let shoppinglist of shoppinglists">
-                    <a *ngIf="shoppinglist.status.name=='open' && shoppinglist.user.id == authService.getCurrentUserId()"
+                    <a *ngIf="shoppinglist.status.name=='open' && (shoppinglist.user.id === authService.getCurrentUserId())"
                        class="bs-shoppinglists-overview-item"
                        [shoppinglist]="shoppinglist"
                        [routerLink]="shoppinglist.id"></a>
@@ -17,14 +19,14 @@
             <div *ngIf="false" class="alert alert-info">
                 <strong>Information: </strong> Derzeit gibt es keine offenen Einkäufe
             </div>
+            <hr class="my-5">
         </span>
 
         <h2 class="widget-title-open">Übernommene Einkaufslisten</h2>
         <span *ngFor="let shoppinglist of shoppinglists">
             <span *ngIf="authService.isCurrentUserVolunteer(); else showListOfSearcher">
-                    <a *ngIf="shoppinglist.status.name=='inprogress' && shoppinglist.volunteer.id == authService.getCurrentUserId()" class="bs-shoppinglist-overview-vol-item"
-                       [shoppinglist]="shoppinglist"
-                       [routerLink]="shoppinglist.id"></a>
+                    <div *ngIf="shoppinglist.status.name=='inprogress' && shoppinglist.volunteer.id == authService.getCurrentUserId()" class="bs-shoppinglist-overview-vol-item"
+                       [shoppinglist]="shoppinglist"></div>
                 </span>
             <ng-template #showListOfSearcher>
                 <a *ngIf="shoppinglist.status.name=='inprogress' && shoppinglist.user.id == authService.getCurrentUserId()" class="bs-shoppinglists-overview-item"
@@ -39,12 +41,13 @@
             <strong>Information: </strong> Derzeit gibt es keine übernommene Einkäufe
         </div>
 
+        <hr class="my-5">
+
         <h2 class="widget-title-open">Abgeschlossene Einkaufslisten</h2>
         <span *ngFor="let shoppinglist of shoppinglists">
             <span *ngIf="authService.isCurrentUserVolunteer(); else showListOfSearcher">
-                    <a *ngIf="shoppinglist.status.name=='done' && shoppinglist.volunteer.id == authService.getCurrentUserId()" class="bs-shoppinglist-overview-vol-item"
-                       [shoppinglist]="shoppinglist"
-                       [routerLink]="shoppinglist.id"></a>
+                    <div *ngIf="shoppinglist.status.name=='done' && shoppinglist.volunteer.id == authService.getCurrentUserId()" class="bs-shoppinglist-overview-vol-item"
+                       [shoppinglist]="shoppinglist"></div>
                 </span>
             <ng-template #showListOfSearcher>
                 <a *ngIf="shoppinglist.status.name=='done' && shoppinglist.user.id == authService.getCurrentUserId()" class="bs-shoppinglists-overview-item"

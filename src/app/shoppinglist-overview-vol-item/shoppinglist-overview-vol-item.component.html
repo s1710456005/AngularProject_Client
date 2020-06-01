@@ -10,13 +10,11 @@
                 <h5 class="card-title">{{shoppinglist.title}}</h5>
                 <p class="card-text">
                     Erstellt von: <b>{{shoppinglist.user.firstname}} {{shoppinglist.user.lastname}}</b><br>
-                    Über Klick auf die Liste, kommst du zu den Details...
                 </p>
-                <div *ngIf="shoppinglist.status.name=='inprogress'" class="footer-button-container">
-                    <button type="button" class="btn btn-primary" (click)="setListToDone(shoppinglist)" >Einkauf abschließen</button>
-                </div>
-                <div *ngIf="shoppinglist.status.name=='open'" class="footer-button-container">
-                    <button type="button" class="btn btn-primary" (click)="setListInProgress(shoppinglist)" >Einkauf übernehmen</button>
+                <div class="footer-button-container multiple-btns">
+                    <button type="button" class="btn btn-primary" *ngIf="shoppinglist.status.name=='inprogress'" (click)="setListToDone(shoppinglist)" >Abschließen</button>
+                    <button type="button" class="btn btn-primary" *ngIf="shoppinglist.status.name=='open'" (click)="setListInProgress(shoppinglist)" [routerLink]="'/shoppinglists'" >Übernehmen</button>
+                    <a class="link-secondary" [routerLink]="['../shoppinglists', shoppinglist?.id]">Details</a>
                 </div>
             </div>
         </div>

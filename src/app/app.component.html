@@ -1,12 +1,17 @@
 <header>
-    <nav class="px-5 navbar navbar-expand-sm bg-light d-flex justify-content-between">
+    <nav class="px-sm-5 navbar navbar-expand-sm bg-light d-flex justify-content-between">
         <!-- Brand/logo -->
-        <a class="navbar-brand" routerLink="home" routerLinkActive= "active">
-            <i class="fas fa-shopping-cart"></i>
-            LOGO
-        </a>
+        <div class="d-flex justify-content-between">
+            <a class="navbar-brand" routerLink="home" routerLinkActive= "active">
+                <i class="fas fa-shopping-cart"></i>
+                LOGO
+            </a>
+            <a class="nav-link d-sm-none d-xs-flex" (click)="showResponsiveMenu()"><i class="fa fa-bars"></i></a>
+        </div>
+
+
         <!-- Links -->
-        <ul class="navbar-nav">
+        <ul class="navbar-nav topnav" id="topNav">
             <li class="nav-item">
                 <a class="nav-link" routerLink="home" routerLinkActive="active">Home</a>
             </li>

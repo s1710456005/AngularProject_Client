@@ -6,7 +6,7 @@ import {AuthtenticationService} from "../shared/authtentication.service";
 
 
 @Component({
-  selector: 'a.bs-shoppinglist-overview-vol-item',
+  selector: 'div.bs-shoppinglist-overview-vol-item',
   templateUrl: './shoppinglist-overview-vol-item.component.html',
   styles: []
 })
